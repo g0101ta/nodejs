@@ -53,7 +53,9 @@ fastify.all('/incoming-call', async (request, reply) => {
                           <Response>
                               <Say language="ja-JP">これはテストです。スタートします。</Say>
                               <Pause length="1"/>
-
+                              <Connect>
+                                  <Stream url="wss://${request.headers.host}/media-stream" />
+                              </Connect>
                           </Response>`;
 
   reply.type('text/xml').send(twimlResponse);
