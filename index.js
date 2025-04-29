@@ -123,7 +123,7 @@ fastify.register(async (fastify) => {
           content: [
             {
               type: 'input_text',
-              text: 'こんにちは。私の名前はAkihiroです。なにかお手伝いできますか',
+              text: 'こんにちは。私の名前はAkihiroです。お店の予約をしに来ました。空いている時間が知りたいです。',
             },
           ],
         },
