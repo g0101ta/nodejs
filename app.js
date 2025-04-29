@@ -1,21 +1,18 @@
 const express = require('express');
-const path = require('path');
-const indexRouter = require('./routes/index');
 
 const app = express();
 const PORT = 3000;
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Use the router for handling routes
-app.use('/', indexRouter);
-
-// Catch-all route for handling 404 errors
-app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-  });
+app.use('/api', (req, res) => {
+  const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
+                          <Response>
+                              <Say>Please wait while we connect your call to the A. I. voice assistant, powered by Twilio and the Open-A.I. Realtime API</Say>
+                              <Pause length="1"/>
+                              <Say>O.K. you can start talking!</Say>
+                          </Response>`;
+  res.send(twimlResponse);
+});
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+  console.log(`Server running`);
 });
