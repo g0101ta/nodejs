@@ -3,20 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-app.get('/api', (req, res) => {
-  const wssUrl = `ws://${req.headers.host}/media-stream`;
-  console.log(wssUrl);
-  const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
-                          <Response>
-                              <Say>Please wait while we connect your call to the A. I. voice assistant, powered by Twilio and the Open-A.I. Realtime API</Say>
-                              <Pause length="1"/>
-                              <Say>you can start talking!</Say>
-                              <Connect>
-                                  <Stream url="${wssUrl}" />
-                              </Connect>
-                          </Response>`;
-  res.status(200).type('text/xml').send(twimlResponse);
-});
+app.use('/api', require('./routes/index'));
 
 app.listen(PORT, () => {
   console.log(`Server running`);
