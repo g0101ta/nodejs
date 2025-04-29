@@ -13,7 +13,7 @@ expressWs(router);
 
 // WebSocketエンドポイントの設定
 router.ws('/media-stream', (ws, req) => {
-  console.log('media-stream accessed');
+  console.log('Client connected');
   const openAiWs = new WebSocket(
     'wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-10-01',
     {
