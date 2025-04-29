@@ -7,6 +7,11 @@ import fastifyWs from '@fastify/websocket';
 // Load environment variables from .env file
 dotenv.config();
 
+// Log environment variables for debugging
+console.log('Environment variables loaded:');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('PORT env var:', process.env.PORT);
+
 // Retrieve the OpenAI API key from environment variables.
 const { OPENAI_API_KEY } = process.env;
 
@@ -25,6 +30,9 @@ const SYSTEM_MESSAGE =
   'You are a helpful and bubbly AI assistant who loves to chat about anything the user is interested about and is prepared to offer them facts. You have a penchant for dad jokes, owl jokes, and rickrolling – subtly. Always stay positive, but work in a joke when appropriate.';
 const VOICE = 'alloy';
 const PORT = process.env.PORT || 5050; // Allow dynamic port assignment
+
+console.log(`Using PORT: ${PORT}`);
+console.log(`Environment PORT: ${process.env.PORT}`);
 
 // List of Event Types to log to the console. See the OpenAI Realtime API Documentation: https://platform.openai.com/docs/api-reference/realtime
 const LOG_EVENT_TYPES = [
@@ -294,8 +302,9 @@ fastify.register(async (fastify) => {
 
 fastify.listen({ port: PORT, host: '0.0.0.0' }, (err) => {
   if (err) {
-    console.error(err);
+    console.error('Server startup error:', err);
     process.exit(1);
   }
   console.log(`Server is listening on port ${PORT}`);
+  console.log(`Full server address: http://0.0.0.0:${PORT}`);
 });
