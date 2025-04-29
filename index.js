@@ -53,7 +53,9 @@ fastify.all('/incoming-call', async (request, reply) => {
                           <Response>
                               <Say language="ja-JP">これはテストです。スタートします。</Say>
                               <Pause length="1"/>
-
+                              <Connect>
+                                  <Stream url="wss://${request.headers.host}/media-stream" />
+                              </Connect>
                           </Response>`;
 
   reply.type('text/xml').send(twimlResponse);
@@ -290,7 +292,7 @@ fastify.register(async (fastify) => {
   });
 });
 
-fastify.listen({ port: PORT }, (err) => {
+fastify.listen({ port: PORT, host: '0.0.0.0' }, (err) => {
   if (err) {
     console.error(err);
     process.exit(1);
